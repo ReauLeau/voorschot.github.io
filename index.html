@@ -448,7 +448,7 @@
           </div>
           <div class="info-item">
             <label>Volgende incasso</label>
-            <div class="value">01-04-2026</div>
+            <div class="value">16-04-2026</div>
           </div>
           <div class="info-item">
             <label>Laatste meterstand</label>
@@ -662,7 +662,7 @@
         </div>
 
         <div id="cyclus-toelichting" style="margin-top:12px; font-size:12px; color: var(--sap-text-muted);">
-          Huidige cyclus blijft actief. Eerste incasso: <strong>01-04-2026</strong>
+          Huidige cyclus blijft actief. Eerste incasso: <strong>16-04-2026</strong>
         </div>
 
         <div class="action-bar">
@@ -723,10 +723,10 @@
 
     // ── Cyclus selectie ─────────────────────────────────────────
     const cyclusTeksten = {
-      maandelijks:      'Huidige cyclus blijft actief. Eerste incasso: <strong>01-04-2026</strong>',
-      tweemaandelijks:  'Cyclus wordt tweemaandelijks. Eerste incasso: <strong>01-05-2026</strong>',
-      kwartaal:         'Cyclus wordt per kwartaal. Eerste incasso: <strong>01-07-2026</strong>',
-      halfjaar:         'Cyclus wordt halfjaarlijks. Eerste incasso: <strong>01-10-2026</strong>',
+      maandelijks:      'Huidige cyclus blijft actief. Eerste incasso: <strong>16-04-2026</strong>',
+      tweemaandelijks:  'Cyclus wordt tweemaandelijks. Eerste incasso: <strong>16-05-2026</strong>',
+      kwartaal:         'Cyclus wordt per kwartaal. Eerste incasso: <strong>16-07-2026</strong>',
+      halfjaar:         'Cyclus wordt halfjaarlijks. Eerste incasso: <strong>16-10-2026</strong>',
     };
 
     function selectCyclus(el, val) {
@@ -739,7 +739,7 @@
 
     // ── Opslaan (demo feedback) ─────────────────────────────────
     function opslaan() {
-      alert('Wijziging opgeslagen in S/4HANA.\nVolgend termijnbedrag wordt toegepast per 01-04-2026.');
+      alert('Wijziging opgeslagen in S/4HANA.\nVolgend termijnbedrag wordt toegepast per 16-04-2026.');
     }
     function opslaanCyclus() {
       alert('Cyclus bijgewerkt in S/4HANA.\nWijziging is verwerkt op contractrekening 200093741.');

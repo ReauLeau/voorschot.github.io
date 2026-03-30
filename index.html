@@ -7,615 +7,743 @@
   <style>
     /* ─── SAP Fiori Design Tokens ─────────────────────────────── */
     :root {
-      --sap-blue:        #0a6ed1;
-      --sap-blue-dark:   #0854a0;
-      --sap-shell:       #354a5e;
-      --sap-bg:          #f5f6f7;
-      --sap-white:       #ffffff;
-      --sap-border:      #d9d9d9;
-      --sap-border-dark: #bfbfbf;
-      --sap-text:        #32363a;
-      --sap-text-muted:  #6a6d70;
-      --sap-success-bg:  #f1fdf6;
-      --sap-success:     #107e3e;
-      --sap-warning-bg:  #fef7f1;
-      --sap-warning:     #df6e0c;
-      --sap-error:       #bb0000;
-      --sap-info-bg:     #e8f3ff;
-      --sap-radius:      4px;
-      --sap-font:        "72", "72full", Arial, Helvetica, sans-serif;
+      --sap-blue:         #0a6ed1;
+      --sap-blue-hover:   #085caf;
+      --sap-blue-light:   #e8f2fc;
+      --sap-white:        #ffffff;
+      --sap-bg:           #f5f6f7;
+      --sap-border:       #d9d9d9;
+      --sap-text:         #1d2d3e;
+      --sap-text-muted:   #6a7483;
+      --sap-success:      #107e3e;
+      --sap-success-bg:   #f1fdf6;
+      --sap-warning:      #e76500;
+      --sap-warning-bg:   #fff8f0;
+      --sap-error:        #bb0000;
+      --sap-error-bg:     #fff1f1;
+      --sap-section-bg:   #fafafa;
+      --radius:           4px;
+      --font:             'Segoe UI', Arial, sans-serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: var(--sap-font);
-      font-size: 14px;
+      font-family: var(--font);
+      font-size: 13px;
       color: var(--sap-text);
       background: var(--sap-bg);
-      line-height: 1.4;
     }
 
-    /* ─── Shell Bar ───────────────────────────────────────────── */
-    .shell-bar {
-      background: var(--sap-shell);
-      color: #fff;
+    /* ─── Shell Header ─────────────────────────────────────────── */
+    .shell-header {
+      background: var(--sap-blue);
+      color: white;
+      padding: 0 16px;
       height: 44px;
       display: flex;
       align-items: center;
-      padding: 0 16px;
-      gap: 10px;
+      gap: 12px;
+      border-bottom: 1px solid var(--sap-blue-hover);
     }
-    .shell-bar .app-icon {
-      width: 26px; height: 26px;
-      background: var(--sap-blue);
-      border-radius: 4px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 700;
+    .shell-header .logo {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
-    .shell-bar .app-name { font-size: 14px; font-weight: 600; }
-    .shell-bar .sys-label { margin-left: auto; font-size: 11px; color: rgba(255,255,255,0.6); }
+    .shell-header .divider {
+      width: 1px; height: 20px;
+      background: rgba(255,255,255,0.35);
+    }
+    .shell-header .app-title {
+      font-size: 13px;
+      opacity: 0.92;
+    }
+    .shell-header .spacer { flex: 1; }
+    .shell-header .badge {
+      background: rgba(255,255,255,0.18);
+      border-radius: 10px;
+      padding: 2px 10px;
+      font-size: 11px;
+      font-weight: 600;
+    }
 
-    /* ─── Object Header ───────────────────────────────────────── */
+    /* ─── Object Header ────────────────────────────────────────── */
     .object-header {
       background: var(--sap-white);
       border-bottom: 1px solid var(--sap-border);
       padding: 12px 16px 10px;
     }
-    .object-header-top {
+    .object-header .title-row {
       display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
     }
-    .object-type     { font-size: 11px; color: var(--sap-text-muted); margin-bottom: 2px; }
-    .object-title    { font-size: 18px; font-weight: 600; }
-    .object-subtitle { font-size: 12px; color: var(--sap-text-muted); margin-top: 2px; }
-
-    .status-badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 3px 10px; border-radius: 12px;
-      font-size: 11px; font-weight: 600; white-space: nowrap;
+    .object-header .icon {
+      width: 36px; height: 36px;
+      background: var(--sap-blue-light);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: var(--sap-blue); font-weight: 700;
+      flex-shrink: 0;
     }
-    .status-active { background: var(--sap-success-bg); color: var(--sap-success); }
-    .status-dot    { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
-
-    .object-attrs { display: flex; gap: 24px; margin-top: 10px; flex-wrap: wrap; }
-    .attr-item label { display: block; font-size: 11px; color: var(--sap-text-muted); margin-bottom: 1px; }
-    .attr-item span  { font-size: 13px; font-weight: 500; }
-
-    /* ─── Page Content ────────────────────────────────────────── */
-    .page-content { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
-
-    /* ─── Section Card ────────────────────────────────────────── */
-    .section {
-      background: var(--sap-white);
-      border: 1px solid var(--sap-border);
-      border-radius: var(--sap-radius);
-      overflow: hidden;
+    .object-header h1 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--sap-text);
     }
-    .section-header {
-      padding: 8px 14px;
-      background: #fafafa;
-      border-bottom: 1px solid var(--sap-border);
-    }
-    .section-title { font-size: 13px; font-weight: 700; }
-    .section-body  { padding: 14px; }
-
-    /* ─── Huidige situatie grid ───────────────────────────────── */
-    .current-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-    }
-    .current-item {
-      padding: 10px 14px;
-      border-right: 1px solid var(--sap-border);
-    }
-    .current-item:last-child { border-right: none; }
-    .current-item .ci-label { font-size: 11px; color: var(--sap-text-muted); margin-bottom: 3px; }
-    .current-item .ci-value { font-size: 15px; font-weight: 600; }
-    .current-item .ci-sub   { font-size: 11px; color: var(--sap-text-muted); margin-top: 1px; }
-
-    /* ─── Segmented button (tab-like selector) ────────────────── */
-    .seg-group {
-      display: inline-flex;
-      border: 1px solid var(--sap-border-dark);
-      border-radius: var(--sap-radius);
-      overflow: hidden;
-      margin-bottom: 16px;
-    }
-    .seg-btn {
-      padding: 6px 16px;
-      font-size: 13px;
-      font-family: var(--sap-font);
-      background: var(--sap-white);
+    .object-header .subtitle {
+      font-size: 12px;
       color: var(--sap-text-muted);
-      border: none;
-      border-right: 1px solid var(--sap-border-dark);
-      cursor: pointer;
-      transition: background 0.12s, color 0.12s;
+      margin-left: 46px;
+      display: flex;
+      gap: 20px;
     }
-    .seg-btn:last-child { border-right: none; }
-    .seg-btn.active {
-      background: var(--sap-blue);
-      color: #fff;
+    .object-header .subtitle span::before {
+      content: '';
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 11px;
       font-weight: 600;
     }
-    .seg-btn:not(.active):hover { background: #f0f4fa; }
+    .status-active   { background: var(--sap-success-bg); color: var(--sap-success); }
+    .status-warning  { background: var(--sap-warning-bg); color: var(--sap-warning); }
 
-    /* ─── Form helpers ────────────────────────────────────────── */
-    .form-grid   { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 20px; }
-    .form-grid-2 { grid-template-columns: repeat(2, 1fr); }
-
-    .form-field { display: flex; flex-direction: column; gap: 4px; }
-    .form-field label {
-      font-size: 11px; color: var(--sap-text-muted); font-weight: 600;
+    /* ─── Page Wrapper ─────────────────────────────────────────── */
+    .page {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 900px;
     }
-    .form-field label .req { color: var(--sap-error); margin-left: 2px; }
-    .form-field .ro-val {
-      font-size: 13px; font-weight: 500;
-      padding: 6px 0; border-bottom: 1px dashed var(--sap-border);
+
+    /* ─── Section Cards ────────────────────────────────────────── */
+    .card {
+      background: var(--sap-white);
+      border: 1px solid var(--sap-border);
+      border-radius: var(--radius);
+    }
+    .card-header {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--sap-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-header h2 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--sap-text);
+    }
+    .card-body {
+      padding: 14px 16px;
+    }
+
+    /* ─── Info Grid ────────────────────────────────────────────── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px 24px;
+    }
+    .info-item label {
+      display: block;
+      font-size: 11px;
+      color: var(--sap-text-muted);
+      margin-bottom: 2px;
+    }
+    .info-item .value {
+      font-size: 13px;
+      color: var(--sap-text);
+      font-weight: 500;
+    }
+    .info-item .value.highlight {
+      color: var(--sap-blue);
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    /* ─── Divider ──────────────────────────────────────────────── */
+    .divider-h {
+      border: none;
+      border-top: 1px solid var(--sap-border);
+      margin: 12px 0;
+    }
+
+    /* ─── Form Rows ────────────────────────────────────────────── */
+    .form-section-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--sap-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    .form-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 140px;
+    }
+    .form-group label {
+      font-size: 11px;
       color: var(--sap-text-muted);
     }
-    .form-field input,
-    .form-field select {
+    .form-group input,
+    .form-group select {
       height: 32px;
-      border: 1px solid var(--sap-border-dark);
-      border-radius: var(--sap-radius);
+      border: 1px solid var(--sap-border);
+      border-radius: var(--radius);
       padding: 0 8px;
       font-size: 13px;
-      font-family: var(--sap-font);
       color: var(--sap-text);
       background: var(--sap-white);
       outline: none;
-      transition: border-color 0.15s, box-shadow 0.15s;
+      transition: border-color 0.15s;
     }
-    .form-field input:focus,
-    .form-field select:focus {
+    .form-group input:focus,
+    .form-group select:focus {
       border-color: var(--sap-blue);
-      box-shadow: 0 0 0 2px rgba(10,110,209,0.15);
+      box-shadow: 0 0 0 2px rgba(10,110,209,0.12);
     }
-
-    /* ─── Calc result box ─────────────────────────────────────── */
-    .calc-result {
+    .form-group input[readonly] {
+      background: var(--sap-section-bg);
+      color: var(--sap-text-muted);
+    }
+    .form-group .unit {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 10px 14px;
-      background: var(--sap-info-bg);
-      border: 1px solid #b3d4f5;
-      border-radius: var(--sap-radius);
-      margin-top: 14px;
-    }
-    .calc-result .cr-label { font-size: 12px; color: var(--sap-text-muted); }
-    .calc-result .cr-value { font-size: 18px; font-weight: 700; color: var(--sap-blue); }
-    .calc-result .cr-delta { font-size: 12px; font-weight: 600; }
-    .delta-up   { color: var(--sap-warning); }
-    .delta-down { color: var(--sap-success); }
-    .calc-result .cr-sep { color: var(--sap-border); font-size: 20px; }
-
-    /* ─── Panel visibility ────────────────────────────────────── */
-    .method-panel { display: none; }
-    .method-panel.visible { display: block; }
-
-    /* ─── Divider ─────────────────────────────────────────────── */
-    .divider { border: none; border-top: 1px solid var(--sap-border); margin: 14px 0; }
-
-    /* ─── Notification ────────────────────────────────────────── */
-    .notification {
-      display: none;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: var(--sap-radius);
-      font-size: 13px;
-    }
-    .notification.success {
-      background: var(--sap-success-bg);
-      border: 1px solid #b5dfca;
-      color: var(--sap-success);
-    }
-    .notification.error {
-      background: #fff0f0;
-      border: 1px solid #f5b8b8;
-      color: var(--sap-error);
-    }
-    .notification-icon  { font-size: 16px; }
-    .notification-title { font-weight: 700; margin-bottom: 2px; }
-    .notification-msg   { font-size: 12px; }
-
-    /* ─── Action Footer ───────────────────────────────────────── */
-    .action-footer {
-      background: var(--sap-white);
+      height: 32px;
+      padding: 0 10px;
+      background: var(--sap-section-bg);
       border: 1px solid var(--sap-border);
-      border-radius: var(--sap-radius);
-      padding: 12px 14px;
+      border-left: none;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: 12px;
+      color: var(--sap-text-muted);
+      white-space: nowrap;
+    }
+    .input-with-unit {
+      display: flex;
+    }
+    .input-with-unit input {
+      border-radius: var(--radius) 0 0 var(--radius);
+      flex: 1;
+    }
+
+    /* ─── Radio Tabs (berekeningswijze) ────────────────────────── */
+    .radio-tabs {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--sap-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      width: fit-content;
+      margin-bottom: 12px;
+    }
+    .radio-tab input[type="radio"] { display: none; }
+    .radio-tab label {
+      display: block;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--sap-text-muted);
+      background: var(--sap-white);
+      border-right: 1px solid var(--sap-border);
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+    .radio-tab:last-child label { border-right: none; }
+    .radio-tab input[type="radio"]:checked + label {
+      background: var(--sap-blue);
+      color: white;
+      font-weight: 600;
+    }
+
+    /* ─── Berekeningsresultaat ─────────────────────────────────── */
+    .berekening-result {
+      background: var(--sap-blue-light);
+      border: 1px solid #b3d4f5;
+      border-radius: var(--radius);
+      padding: 10px 14px;
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .berekening-result .res-item label {
+      font-size: 11px;
+      color: var(--sap-blue-hover);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .berekening-result .res-item .res-value {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--sap-blue);
+    }
+
+    /* ─── Cyclus selector ──────────────────────────────────────── */
+    .cyclus-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
+    .cyclus-option {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border: 1px solid var(--sap-border);
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 12px;
+      color: var(--sap-text-muted);
+      background: var(--sap-white);
+      transition: all 0.15s;
+      user-select: none;
+    }
+    .cyclus-option input[type="radio"] { display: none; }
+    .cyclus-option.selected {
+      background: var(--sap-blue);
+      color: white;
+      border-color: var(--sap-blue);
+      font-weight: 600;
+    }
+
+    /* ─── Buttons ──────────────────────────────────────────────── */
+    .btn {
+      height: 32px;
+      padding: 0 16px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--sap-blue);
+      color: white;
+      border-color: var(--sap-blue);
+    }
+    .btn-primary:hover { background: var(--sap-blue-hover); border-color: var(--sap-blue-hover); }
+    .btn-secondary {
+      background: var(--sap-white);
+      color: var(--sap-text);
+      border-color: var(--sap-border);
+    }
+    .btn-secondary:hover { background: var(--sap-bg); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--sap-blue);
+      border-color: transparent;
+    }
+    .btn-ghost:hover { background: var(--sap-blue-light); }
+
+    .action-bar {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--sap-border);
+      justify-content: flex-end;
+    }
+
+    /* ─── Meldingsbalk ─────────────────────────────────────────── */
+    .msg-bar {
       display: flex;
       align-items: center;
       gap: 8px;
+      padding: 8px 14px;
+      border-radius: var(--radius);
+      font-size: 12px;
+      font-weight: 500;
     }
-    .btn {
-      height: 32px; padding: 0 16px;
-      border-radius: var(--sap-radius);
-      font-size: 13px; font-weight: 600;
-      font-family: var(--sap-font);
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: background 0.15s;
-    }
-    .btn-primary   { background: var(--sap-blue); color: #fff; border-color: var(--sap-blue); }
-    .btn-primary:hover { background: var(--sap-blue-dark); }
-    .btn-secondary { background: var(--sap-white); color: var(--sap-text); border-color: var(--sap-border-dark); }
-    .btn-secondary:hover { background: #f0f0f0; }
+    .msg-bar.info    { background: var(--sap-blue-light); color: var(--sap-blue); border: 1px solid #b3d4f5; }
+    .msg-bar.warning { background: var(--sap-warning-bg); color: var(--sap-warning); border: 1px solid #f5c07a; }
+    .msg-icon { font-size: 14px; }
 
-    /* ─── Footer ──────────────────────────────────────────────── */
-    .page-footer { padding: 8px 16px; font-size: 11px; color: var(--sap-text-muted); text-align: right; }
+    /* ─── Footer ───────────────────────────────────────────────── */
+    .footer {
+      font-size: 11px;
+      color: var(--sap-text-muted);
+      padding: 6px 16px 12px;
+      text-align: right;
+    }
+
+    /* ─── Berekening panels (show/hide) ────────────────────────── */
+    .calc-panel { display: none; }
+    .calc-panel.active { display: block; }
   </style>
 </head>
 <body>
 
-  <!-- Shell Bar -->
-  <div class="shell-bar">
-    <div class="app-icon">W</div>
-    <span class="app-name">Service Cloud</span>
-    <span class="sys-label">S/4HANA PRD &nbsp;·&nbsp; WML Waterleiding Maatschappij Limburg</span>
+  <!-- Shell Header -->
+  <div class="shell-header">
+    <span class="logo">WML</span>
+    <div class="divider"></div>
+    <span class="app-title">Service Cloud – Contractrekening</span>
+    <span class="spacer"></span>
+    <span class="badge">S/4HANA PRD</span>
   </div>
 
   <!-- Object Header -->
   <div class="object-header">
-    <div class="object-header-top">
-      <div>
-        <div class="object-type">Contractrekening</div>
-        <div class="object-title">S. van Loon</div>
-        <div class="object-subtitle">Limburglaan 10, 6229 GA Maastricht</div>
-      </div>
-      <span class="status-badge status-active">
-        <span class="status-dot"></span>Actief
-      </span>
+    <div class="title-row">
+      <div class="icon">S</div>
+      <h1>Stan van Loon</h1>
+      <span class="status-badge status-active">● Actief</span>
     </div>
-    <div class="object-attrs">
-      <div class="attr-item"><label>Contractrekening</label><span>30000001</span></div>
-      <div class="attr-item"><label>IBAN</label><span>NL76 RABO 0312 8459 23</span></div>
-      <div class="attr-item"><label>Incassodatum</label><span>16e van de maand</span></div>
+    <div class="subtitle">
+      <span>Limburglaan 10, 6229 GA Maastricht</span>
+      <span>Debiteurnr: 1000482971</span>
+      <span>IBAN: NL91 RABO 0315 2285 73</span>
     </div>
   </div>
 
-  <!-- Page Content -->
-  <div class="page-content">
+  <!-- Page -->
+  <div class="page">
 
-    <!-- Huidige situatie -->
-    <div class="section">
-      <div class="section-header">
-        <span class="section-title">Huidige situatie</span>
+    <!-- Melding -->
+    <div class="msg-bar info">
+      <span class="msg-icon">ℹ</span>
+      Wijzigingen in de voorschotcyclus worden direct verwerkt in S/4HANA. Controleer het nieuwe termijnbedrag vóór opslaan.
+    </div>
+
+    <!-- ── Kaart 1: Huidige situatie ── -->
+    <div class="card">
+      <div class="card-header">
+        <h2>Huidige situatie</h2>
+        <span class="status-badge status-active">Automatische incasso actief</span>
       </div>
-      <div class="current-grid">
-        <div class="current-item">
-          <div class="ci-label">Voorschotbedrag</div>
-          <div class="ci-value">€ 25,00</div>
-          <div class="ci-sub">per maand</div>
-        </div>
-        <div class="current-item">
-          <div class="ci-label">Voorschotcyclus</div>
-          <div class="ci-value">Kwartaal</div>
-          <div class="ci-sub">elke 3 maanden</div>
-        </div>
-        <div class="current-item">
-          <div class="ci-label">Laatste meterstand</div>
-          <div class="ci-value">5.000 m³</div>
-          <div class="ci-sub">26-03-2026</div>
-        </div>
-        <div class="current-item">
-          <div class="ci-label">Jaarverbruik (berekend)</div>
-          <div class="ci-value">180 m³</div>
-          <div class="ci-sub">referentieperiode 1 jaar</div>
+      <div class="card-body">
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Huidig voorschotbedrag</label>
+            <div class="value highlight">€ 26,00 / mnd</div>
+          </div>
+          <div class="info-item">
+            <label>Voorschotcyclus</label>
+            <div class="value">Maandelijks</div>
+          </div>
+          <div class="info-item">
+            <label>Volgende incasso</label>
+            <div class="value">01-04-2026</div>
+          </div>
+          <div class="info-item">
+            <label>Laatste meterstand</label>
+            <div class="value">19.058 m³</div>
+          </div>
+          <div class="info-item">
+            <label>Opnamedatum</label>
+            <div class="value">27-03-2026</div>
+          </div>
+          <div class="info-item">
+            <label>Jaarverbruik (schatting)</label>
+            <div class="value">105 m³</div>
+          </div>
+          <div class="info-item">
+            <label>Contract</label>
+            <div class="value">30000001</div>
+          </div>
+          <div class="info-item">
+            <label>Contractrekening</label>
+            <div class="value">25000000</div>
+          </div>
+          <div class="info-item">
+            <label>Tariefgroep</label>
+            <div class="value">Kleinverbruik wonen</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Voorschotcyclus wijzigen -->
-    <div class="section">
-      <div class="section-header">
-        <span class="section-title">Voorschotcyclus wijzigen</span>
+    <!-- ── Kaart 2: Voorschotbedrag wijzigen ── -->
+    <div class="card">
+      <div class="card-header">
+        <h2>Voorschotbedrag wijzigen</h2>
       </div>
-      <div class="section-body">
-        <div class="form-grid form-grid-2" style="max-width: 500px;">
-          <div class="form-field">
-            <label>Huidige cyclus</label>
-            <div class="ro-val">Kwartaal (elke 3 maanden)</div>
+      <div class="card-body">
+
+        <p class="form-section-title">Berekeningswijze</p>
+
+        <!-- Radio tabs -->
+        <div class="radio-tabs">
+          <div class="radio-tab">
+            <input type="radio" name="methode" id="m-verbruik" value="verbruik" checked onchange="toonPanel(this.value)" />
+            <label for="m-verbruik">Op basis van verbruik</label>
           </div>
-          <div class="form-field">
-            <label>Nieuwe cyclus <span class="req">*</span></label>
-            <select id="nieuweCyclus">
-              <option value="">– Selecteer –</option>
-              <option value="maand">Maandelijks</option>
-              <option value="2maand">Tweemaandelijks</option>
-              <option value="kwartaal" selected>Kwartaal</option>
-              <option value="halfj">Halfjaarlijks</option>
-              <option value="jaar">Jaarlijks</option>
-            </select>
+          <div class="radio-tab">
+            <input type="radio" name="methode" id="m-meterstand" value="meterstand" onchange="toonPanel(this.value)" />
+            <label for="m-meterstand">Op basis van meterstand</label>
+          </div>
+          <div class="radio-tab">
+            <input type="radio" name="methode" id="m-bedrag" value="bedrag" onchange="toonPanel(this.value)" />
+            <label for="m-bedrag">Gekozen bedrag</label>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Voorschot wijzigen -->
-    <div class="section">
-      <div class="section-header">
-        <span class="section-title">Voorschot wijzigen</span>
-      </div>
-      <div class="section-body">
-
-        <div class="seg-group">
-          <button class="seg-btn active" onclick="setMethod('verbruik', this)">Op basis van verbruik</button>
-          <button class="seg-btn"        onclick="setMethod('meterstand', this)">Op basis van meterstand</button>
-          <button class="seg-btn"        onclick="setMethod('bedrag', this)">Gekozen bedrag</button>
+        <!-- Panel: Verbruik -->
+        <div id="panel-verbruik" class="calc-panel active">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Verwacht jaarverbruik</label>
+              <div class="input-with-unit">
+                <input type="number" id="jaarverbruik" value="105" min="1" oninput="berekenVerbruik()" />
+                <span class="unit">m³/jaar</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Tarief per m³ (incl. btw)</label>
+              <div class="input-with-unit">
+                <input type="number" id="tarief" value="1.31" step="0.01" oninput="berekenVerbruik()" />
+                <span class="unit">€</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Vast recht per jaar</label>
+              <div class="input-with-unit">
+                <input type="number" id="vastrechtVerbruik" value="175.00" step="0.01" oninput="berekenVerbruik()" />
+                <span class="unit">€</span>
+              </div>
+            </div>
+          </div>
+          <div class="berekening-result" id="result-verbruik">
+            <div class="res-item">
+              <label>Berekende jaarkosten</label>
+              <div class="res-value" id="rv-jaar">€ 312,55</div>
+            </div>
+            <div class="res-item">
+              <label>Nieuw voorschot per maand</label>
+              <div class="res-value" id="rv-maand">€ 26,05</div>
+            </div>
+          </div>
         </div>
 
-        <!-- METHODE 1: Verbruik -->
-        <div class="method-panel visible" id="panel-verbruik">
-          <div class="form-grid">
-            <div class="form-field">
-              <label>Jaarverbruik (m³)</label>
-              <div class="ro-val">180 m³ &nbsp;(automatisch overgenomen)</div>
+        <!-- Panel: Meterstand -->
+        <div id="panel-meterstand" class="calc-panel">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Huidige meterstand</label>
+              <div class="input-with-unit">
+                <input type="number" id="standHuidig" value="19058" readonly />
+                <span class="unit">m³</span>
+              </div>
             </div>
-            <div class="form-field">
-              <label>Verbruikstarief (€/m³)</label>
-              <div class="ro-val">€ 1,82</div>
+            <div class="form-group">
+              <label>Meterstand vorig jaar</label>
+              <div class="input-with-unit">
+                <input type="number" id="standVorig" value="18953" oninput="berekenMeterstand()" />
+                <span class="unit">m³</span>
+              </div>
             </div>
-            <div class="form-field">
-              <label>Vastrecht (€/mnd)</label>
-              <div class="ro-val">€ 4,50</div>
+            <div class="form-group">
+              <label>Tarief per m³ (incl. btw)</label>
+              <div class="input-with-unit">
+                <input type="number" id="tariefMs" value="1.31" step="0.01" oninput="berekenMeterstand()" />
+                <span class="unit">€</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Vast recht per jaar</label>
+              <div class="input-with-unit">
+                <input type="number" id="vastrechtMs" value="175.00" step="0.01" oninput="berekenMeterstand()" />
+                <span class="unit">€</span>
+              </div>
             </div>
           </div>
-          <div class="calc-result">
-            <div>
-              <div class="cr-label">Berekend maandvoorschot</div>
-              <div class="cr-value">€ 31,80 / mnd</div>
+          <div class="berekening-result" id="result-meterstand">
+            <div class="res-item">
+              <label>Gemeten verbruik (12 mnd)</label>
+              <div class="res-value" id="rm-verbruik">105 m³</div>
             </div>
-            <div class="cr-sep">|</div>
-            <div>
-              <div class="cr-label">Huidig voorschot</div>
-              <div style="font-size:14px; font-weight:600;">€ 25,00 / mnd</div>
+            <div class="res-item">
+              <label>Berekende jaarkosten</label>
+              <div class="res-value" id="rm-jaar">€ 312,55</div>
             </div>
-            <div class="cr-sep">|</div>
-            <div>
-              <div class="cr-label">Verschil</div>
-              <div class="cr-delta delta-up">↑ + € 6,80 / mnd</div>
+            <div class="res-item">
+              <label>Nieuw voorschot per maand</label>
+              <div class="res-value" id="rm-maand">€ 26,05</div>
             </div>
           </div>
-          <div style="margin-top:12px; display:flex; align-items:center; gap:12px;">
-            <div class="form-field" style="flex:0 0 160px;">
-              <label>Nieuw bedrag (€/mnd) <span class="req">*</span></label>
-              <input type="number" id="bedrag-verbruik" value="31.80" min="0" step="0.01" />
+        </div>
+
+        <!-- Panel: Gekozen bedrag -->
+        <div id="panel-bedrag" class="calc-panel">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nieuw voorschotbedrag</label>
+              <div class="input-with-unit">
+                <input type="number" id="gekozenbedrag" value="26" min="1" step="1" oninput="toonGekozenBedrag()" />
+                <span class="unit">€ / mnd</span>
+              </div>
             </div>
-            <div class="form-field" style="flex:1; max-width:240px;">
-              <label>Reden <span class="req">*</span></label>
-              <select id="reden-verbruik">
-                <option value="">– Selecteer –</option>
-                <option value="verbruik" selected>Verbruikswijziging</option>
-                <option value="klant">Klantverzoek</option>
-                <option value="correctie">Correctie</option>
+            <div class="form-group">
+              <label>Reden wijziging</label>
+              <select id="reden">
+                <option>Klantverzoek</option>
+                <option>Verbruikswijziging</option>
+                <option>Verhuizing</option>
+                <option>Tariefwijziging</option>
+                <option>Anders</option>
               </select>
             </div>
           </div>
-        </div>
-
-        <!-- METHODE 2: Meterstand -->
-        <div class="method-panel" id="panel-meterstand">
-          <div class="form-grid form-grid-2" style="max-width:480px;">
-            <div class="form-field">
-              <label>Vorige meterstand (m³)</label>
-              <div class="ro-val">4.820 m³ &nbsp;(15-03-2025)</div>
+          <div class="berekening-result">
+            <div class="res-item">
+              <label>Huidig voorschot</label>
+              <div class="res-value">€ 26,00</div>
             </div>
-            <div class="form-field">
-              <label>Huidige meterstand (m³) <span class="req">*</span></label>
-              <input type="number" id="nieuweStand" placeholder="bijv. 5000" min="0"
-                oninput="berekenVanuitStand()" />
+            <div class="res-item">
+              <label>Nieuw voorschot</label>
+              <div class="res-value" id="rb-nieuw">€ 26,00</div>
             </div>
-          </div>
-          <div class="calc-result" id="result-stand" style="display:none">
-            <div>
-              <div class="cr-label">Berekend jaarverbruik</div>
-              <div id="rv-verbruik" class="cr-value" style="font-size:15px;"></div>
-            </div>
-            <div class="cr-sep">|</div>
-            <div>
-              <div class="cr-label">Berekend maandvoorschot</div>
-              <div id="rv-bedrag" class="cr-value"></div>
-            </div>
-            <div class="cr-sep">|</div>
-            <div>
-              <div class="cr-label">Verschil t.o.v. huidig</div>
-              <div id="rv-delta" class="cr-delta"></div>
-            </div>
-          </div>
-          <div style="margin-top:12px; display:flex; align-items:center; gap:12px;">
-            <div class="form-field" style="flex:0 0 160px;">
-              <label>Nieuw bedrag (€/mnd) <span class="req">*</span></label>
-              <input type="number" id="bedrag-stand" min="0" step="0.01" placeholder="–" />
-            </div>
-            <div class="form-field" style="flex:1; max-width:240px;">
-              <label>Reden <span class="req">*</span></label>
-              <select id="reden-stand">
-                <option value="">– Selecteer –</option>
-                <option value="meterstand">Op basis van meterstand</option>
-                <option value="klant">Klantverzoek</option>
-                <option value="correctie">Correctie</option>
-              </select>
+            <div class="res-item">
+              <label>Verschil</label>
+              <div class="res-value" id="rb-verschil">€ 0,00</div>
             </div>
           </div>
         </div>
 
-        <!-- METHODE 3: Gekozen bedrag -->
-        <div class="method-panel" id="panel-bedrag">
-          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-            <div class="form-field" style="flex:0 0 160px;">
-              <label>Gewenst maandbedrag (€) <span class="req">*</span></label>
-              <input type="number" id="bedrag-gekozen" min="0" step="0.01" placeholder="bijv. 35.00"
-                oninput="toonGekozenDelta()" />
-            </div>
-            <div class="form-field" style="flex:1; max-width:240px;">
-              <label>Reden <span class="req">*</span></label>
-              <select id="reden-gekozen">
-                <option value="">– Selecteer –</option>
-                <option value="klant">Klantverzoek</option>
-                <option value="verbruik">Verbruikswijziging</option>
-                <option value="correctie">Correctie</option>
-              </select>
-            </div>
-            <div class="form-field" style="flex:0 0 auto; align-self:flex-end;">
-              <div class="cr-delta" id="delta-gekozen" style="padding:6px 0; font-size:13px;"></div>
-            </div>
-          </div>
+        <div class="action-bar">
+          <button class="btn btn-secondary">Annuleren</button>
+          <button class="btn btn-primary" onclick="opslaan()">Voorschot opslaan</button>
         </div>
 
       </div>
     </div>
 
-    <!-- Notificatie -->
-    <div class="notification success" id="notifSuccess">
-      <span class="notification-icon">✓</span>
-      <div>
-        <div class="notification-title">Wijziging vastgelegd</div>
-        <div class="notification-msg" id="notifMsg"></div>
+    <!-- ── Kaart 3: Voorschotcyclus wijzigen ── -->
+    <div class="card">
+      <div class="card-header">
+        <h2>Voorschotcyclus wijzigen</h2>
       </div>
-    </div>
-    <div class="notification error" id="notifError">
-      <span class="notification-icon">⚠</span>
-      <div>
-        <div class="notification-title">Verplicht veld ontbreekt</div>
-        <div class="notification-msg" id="notifErrorMsg">Vul alle verplichte velden in.</div>
+      <div class="card-body">
+
+        <p class="form-section-title">Huidige cyclus: Maandelijks &nbsp;→&nbsp; Kies nieuwe cyclus</p>
+
+        <div class="cyclus-row" id="cyclus-keuze">
+          <label class="cyclus-option" onclick="selectCyclus(this, 'maandelijks')">
+            <input type="radio" name="cyclus" value="maandelijks" checked />
+            Maandelijks
+          </label>
+          <label class="cyclus-option" onclick="selectCyclus(this, 'tweemaandelijks')">
+            <input type="radio" name="cyclus" value="tweemaandelijks" />
+            Tweemaandelijks
+          </label>
+          <label class="cyclus-option" onclick="selectCyclus(this, 'kwartaal')">
+            <input type="radio" name="cyclus" value="kwartaal" />
+            Per kwartaal
+          </label>
+          <label class="cyclus-option" onclick="selectCyclus(this, 'halfjaar')">
+            <input type="radio" name="cyclus" value="halfjaar" />
+            Halfjaarlijks
+          </label>
+        </div>
+
+        <div id="cyclus-toelichting" style="margin-top:12px; font-size:12px; color: var(--sap-text-muted);">
+          Huidige cyclus blijft actief. Eerste incasso: <strong>01-04-2026</strong>
+        </div>
+
+        <div class="action-bar">
+          <button class="btn btn-secondary">Annuleren</button>
+          <button class="btn btn-primary" onclick="opslaanCyclus()">Cyclus opslaan</button>
+        </div>
+
       </div>
     </div>
 
-    <!-- Action Footer -->
-    <div class="action-footer">
-      <button class="btn btn-primary"   onclick="opslaan()">Opslaan</button>
-      <button class="btn btn-secondary" onclick="annuleren()">Annuleren</button>
-      <span style="flex:1"></span>
-      <span style="font-size:11px; color:var(--sap-text-muted);">Ophaalmoment: 30-03-2026 09:14 &nbsp;·&nbsp; S/4HANA PRD</span>
-    </div>
+  </div><!-- /page -->
 
+  <div class="footer">
+    Contractrekening 25000000 &nbsp;|&nbsp; Contract 30000001 &nbsp;|&nbsp; WML – S/4HANA PRD &nbsp;|&nbsp; Geladen: 30-03-2026 09:14
   </div>
-
-  <div class="page-footer">WML – Waterleiding Maatschappij Limburg &nbsp;·&nbsp; SAP Service Cloud V2</div>
 
   <script>
-    var huidigBedrag = 25.00;
-    var tarief       = 1.82;
-    var vastrecht    = 4.50;
-    var vorigStand   = 4820;
-    var dagVorig     = new Date('2025-03-15');
-    var dagHuidig    = new Date('2026-03-26');
-    var activeMethod = 'verbruik';
-
-    function setMethod(method, btn) {
-      activeMethod = method;
-      document.querySelectorAll('.seg-btn').forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      document.querySelectorAll('.method-panel').forEach(function(p) { p.classList.remove('visible'); });
-      document.getElementById('panel-' + method).classList.add('visible');
-      hide('notifSuccess'); hide('notifError');
+    // ── Panel wisselen ──────────────────────────────────────────
+    function toonPanel(val) {
+      document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + val).classList.add('active');
     }
 
-    function berekenVanuitStand() {
-      var nieuweStand = parseFloat(document.getElementById('nieuweStand').value);
-      if (isNaN(nieuweStand) || nieuweStand <= vorigStand) {
-        hide('result-stand');
-        document.getElementById('bedrag-stand').value = '';
-        return;
-      }
-      var dagVerschil = (dagHuidig - dagVorig) / (1000 * 60 * 60 * 24);
-      var jaarVerbruik = Math.round((nieuweStand - vorigStand) / dagVerschil * 365);
-      var nieuwBedrag  = Math.round(((jaarVerbruik * tarief / 12) + vastrecht) * 100) / 100;
-      var delta        = Math.round((nieuwBedrag - huidigBedrag) * 100) / 100;
-
-      document.getElementById('rv-verbruik').textContent = jaarVerbruik + ' m³ / jaar';
-      document.getElementById('rv-bedrag').textContent   = '€ ' + nieuwBedrag.toFixed(2).replace('.', ',') + ' / mnd';
-
-      var deltaEl = document.getElementById('rv-delta');
-      if (delta > 0) {
-        deltaEl.textContent = '↑ + € ' + delta.toFixed(2).replace('.', ',') + ' / mnd';
-        deltaEl.className = 'cr-delta delta-up';
-      } else if (delta < 0) {
-        deltaEl.textContent = '↓ − € ' + Math.abs(delta).toFixed(2).replace('.', ',') + ' / mnd';
-        deltaEl.className = 'cr-delta delta-down';
-      } else {
-        deltaEl.textContent = '= ongewijzigd';
-        deltaEl.className = 'cr-delta';
-      }
-
-      document.getElementById('bedrag-stand').value = nieuwBedrag.toFixed(2);
-      document.getElementById('result-stand').style.display = 'flex';
+    // ── Bereken op basis van verbruik ───────────────────────────
+    function berekenVerbruik() {
+      const v = parseFloat(document.getElementById('jaarverbruik').value) || 0;
+      const t = parseFloat(document.getElementById('tarief').value) || 0;
+      const vr = parseFloat(document.getElementById('vastrechtVerbruik').value) || 0;
+      const jaar = v * t + vr;
+      const maand = jaar / 12;
+      document.getElementById('rv-jaar').textContent  = '€ ' + jaar.toFixed(2).replace('.', ',');
+      document.getElementById('rv-maand').textContent = '€ ' + maand.toFixed(2).replace('.', ',');
     }
 
-    function toonGekozenDelta() {
-      var val   = parseFloat(document.getElementById('bedrag-gekozen').value);
-      var el    = document.getElementById('delta-gekozen');
-      if (isNaN(val)) { el.textContent = ''; return; }
-      var delta = Math.round((val - huidigBedrag) * 100) / 100;
-      if (delta > 0) {
-        el.textContent = '↑ + € ' + delta.toFixed(2).replace('.', ',') + ' t.o.v. huidig';
-        el.className = 'cr-delta delta-up';
-      } else if (delta < 0) {
-        el.textContent = '↓ − € ' + Math.abs(delta).toFixed(2).replace('.', ',') + ' t.o.v. huidig';
-        el.className = 'cr-delta delta-down';
-      } else {
-        el.textContent = '= ongewijzigd';
-        el.className = 'cr-delta';
-      }
+    // ── Bereken op basis van meterstand ─────────────────────────
+    function berekenMeterstand() {
+      const huidig = parseFloat(document.getElementById('standHuidig').value) || 0;
+      const vorig  = parseFloat(document.getElementById('standVorig').value) || 0;
+      const t      = parseFloat(document.getElementById('tariefMs').value) || 0;
+      const vr     = parseFloat(document.getElementById('vastrechtMs').value) || 0;
+      const verbruik = Math.max(0, huidig - vorig);
+      const jaar     = verbruik * t + vr;
+      const maand    = jaar / 12;
+      document.getElementById('rm-verbruik').textContent = verbruik + ' m³';
+      document.getElementById('rm-jaar').textContent     = '€ ' + jaar.toFixed(2).replace('.', ',');
+      document.getElementById('rm-maand').textContent    = '€ ' + maand.toFixed(2).replace('.', ',');
     }
 
+    // ── Gekozen bedrag ──────────────────────────────────────────
+    function toonGekozenBedrag() {
+      const nieuw   = parseFloat(document.getElementById('gekozenbedrag').value) || 0;
+      const huidig  = 26;
+      const verschil = nieuw - huidig;
+      document.getElementById('rb-nieuw').textContent    = '€ ' + nieuw.toFixed(2).replace('.', ',');
+      document.getElementById('rb-verschil').textContent =
+        (verschil >= 0 ? '+ ' : '- ') + '€ ' + Math.abs(verschil).toFixed(2).replace('.', ',');
+    }
+
+    // ── Cyclus selectie ─────────────────────────────────────────
+    const cyclusTeksten = {
+      maandelijks:      'Huidige cyclus blijft actief. Eerste incasso: <strong>01-04-2026</strong>',
+      tweemaandelijks:  'Cyclus wordt tweemaandelijks. Eerste incasso: <strong>01-05-2026</strong>',
+      kwartaal:         'Cyclus wordt per kwartaal. Eerste incasso: <strong>01-07-2026</strong>',
+      halfjaar:         'Cyclus wordt halfjaarlijks. Eerste incasso: <strong>01-10-2026</strong>',
+    };
+
+    function selectCyclus(el, val) {
+      document.querySelectorAll('.cyclus-option').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      document.getElementById('cyclus-toelichting').innerHTML = cyclusTeksten[val] || '';
+    }
+    // Zet initieel selected op maandelijks
+    document.querySelector('.cyclus-option').classList.add('selected');
+
+    // ── Opslaan (demo feedback) ─────────────────────────────────
     function opslaan() {
-      hide('notifSuccess'); hide('notifError');
-
-      var cyclus = document.getElementById('nieuweCyclus');
-      var cyclusLabel = cyclus.value ? cyclus.options[cyclus.selectedIndex].text : null;
-
-      var bedrag, reden;
-      if (activeMethod === 'verbruik') {
-        bedrag = document.getElementById('bedrag-verbruik').value;
-        reden  = document.getElementById('reden-verbruik').value;
-      } else if (activeMethod === 'meterstand') {
-        bedrag = document.getElementById('bedrag-stand').value;
-        reden  = document.getElementById('reden-stand').value;
-      } else {
-        bedrag = document.getElementById('bedrag-gekozen').value;
-        reden  = document.getElementById('reden-gekozen').value;
-      }
-
-      if (!bedrag || !reden || !cyclusLabel) {
-        document.getElementById('notifErrorMsg').textContent =
-          !cyclusLabel ? 'Selecteer een nieuwe voorschotcyclus.' : 'Vul alle verplichte velden in.';
-        show('notifError');
-        return;
-      }
-
-      document.getElementById('notifMsg').textContent =
-        'CA 30000001 · Nieuw voorschot: € ' + parseFloat(bedrag).toFixed(2).replace('.', ',') + ' / mnd' +
-        ' · Cyclus: ' + cyclusLabel +
-        ' · Reden: ' + reden;
-      show('notifSuccess');
+      alert('Wijziging opgeslagen in S/4HANA.\nVolgend termijnbedrag wordt toegepast per 01-04-2026.');
     }
-
-    function annuleren() {
-      document.getElementById('bedrag-verbruik').value = '31.80';
-      document.getElementById('reden-verbruik').value  = 'verbruik';
-      document.getElementById('nieuweStand').value     = '';
-      document.getElementById('bedrag-stand').value    = '';
-      document.getElementById('reden-stand').value     = '';
-      document.getElementById('bedrag-gekozen').value  = '';
-      document.getElementById('reden-gekozen').value   = '';
-      document.getElementById('delta-gekozen').textContent = '';
-      document.getElementById('nieuweCyclus').value    = 'kwartaal';
-      hide('result-stand');
-      hide('notifSuccess');
-      hide('notifError');
-      setMethod('verbruik', document.querySelectorAll('.seg-btn')[0]);
+    function opslaanCyclus() {
+      alert('Cyclus bijgewerkt in S/4HANA.\nWijziging is verwerkt op contractrekening 200093741.');
     }
-
-    function show(id) { document.getElementById(id).style.display = 'flex'; }
-    function hide(id) { document.getElementById(id).style.display = 'none'; }
   </script>
 
 </body>
